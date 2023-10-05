@@ -1,11 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
+<%= javascript_include_tag "turbo", type: "module" %>
+
 <h2>List of ratings</h2>
 <p>Number of ratings: <%= @ratings.count %></p>
+<%= link_to "New rating", new_rating_path %>
 
 <ul>
   <% @ratings.each do |rating| %>
-      <%= render rating %>
-    
+      <li>
+        <%= render rating %>
+        <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+      </li>
   <% end %>
 </ul>
