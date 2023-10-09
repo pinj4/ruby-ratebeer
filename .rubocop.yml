@@ -69,3 +69,7 @@ Naming/MethodParameterName:
 
 Metrics/BlockLength:
   Enabled: false
+
+Metrics/MethodLength:
+  Eanabled: true
+  Max: 15
