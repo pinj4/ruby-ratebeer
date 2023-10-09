@@ -1,10 +1,10 @@
 module RatingAverage
-    extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-    included do
-        def average_rating
-            ratings = self.ratings.map{ |r| r.score }
-            (ratings.sum(0) / ratings.size).to_f
-        end
+  included do
+    def average_rating
+      ratings = self.ratings.map(&:score)
+      (ratings.sum / ratings.size).to_f
     end
+  end
 end
