@@ -1,6 +1,29 @@
 <p style="color: green"><%= notice %></p>
+<%= javascript_include_tag "turbo", type: "module" %>
+<p>
+<strong>Username:</strong>
+<%= @user.username %>
+</p>
 
-<%= render @user %>
+<p>
+    <% if @user.ratings.empty? %>
+    user hasn't given any ratings yet!
+    <% else %>
+      Has made <%= pluralize(@user.ratings.count, 'rating') %> with an average of <%= @user.average_rating %>
+    <% end %>
+</p>
+<p><strong>ratings</strong></p>
+
+<ul>
+ <% @user.ratings.each do |rating| %>
+   <li> 
+   <%= rating.beer.name %> <%= rating.score %>
+   <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+   </li>
+ <% end %>
+</ul>
+
+
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
