@@ -71,5 +71,5 @@ Metrics/BlockLength:
   Enabled: false
 
 Metrics/MethodLength:
-  Eanabled: true
+  Enabled: true
   Max: 15
