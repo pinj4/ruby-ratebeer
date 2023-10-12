@@ -13,7 +13,7 @@ class RatingsController < ApplicationController
     @rating.user = current_user
     if @rating.save
       redirect_to user_path current_user
-    else 
+    else
       @beers = Beer.all
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = Rating.find(params[:id])
-    rating.delete
+    rating.delete if current_user == rating.user
     redirect_to current_user
   end
 end

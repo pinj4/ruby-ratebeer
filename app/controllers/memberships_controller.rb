@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: %i[ show edit update destroy ]
+  before_action :set_membership, only: %i[show edit update destroy]
 
   # GET /memberships or /memberships.json
   def index
@@ -15,19 +15,19 @@ class MembershipsController < ApplicationController
     @membership = Membership.new
     @beer_clubst = BeerClub.all
     @beer_clubs = []
-    for club in @beer_clubst
+    @beer_clubst.each do |club|
       if club.members.exclude?(current_user)
         @beer_clubs.append(club)
       end
     end
-    end
+  end
 
   # GET /memberships/1/edit
   def edit
   end
 
   # POST /memberships or /memberships.json
-  #def create
+  # def create
   #   @membership = Membership.new(membership_params)
 
   #   respond_to do |format|
@@ -46,7 +46,7 @@ class MembershipsController < ApplicationController
     @membership.user = current_user
     if @membership.save
       redirect_to user_path current_user
-    else 
+    else
       @beer_clubs = BeerClub.all
       render :new, status: :unprocessable_entity
     end
@@ -76,15 +76,16 @@ class MembershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_membership
-      @membership = Membership.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def membership_params
-      #params.require(:membership).permit(:user_id, :beer_club_id)
-      #@membership.user = current_user
-      params.require(:membership).permit(:user_id, :beer_club_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_membership
+    @membership = Membership.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def membership_params
+    # params.require(:membership).permit(:user_id, :beer_club_id)
+    # @membership.user = current_user
+    params.require(:membership).permit(:user_id, :beer_club_id)
+  end
 end

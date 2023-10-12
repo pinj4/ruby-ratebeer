@@ -32,7 +32,7 @@ class BeersController < ApplicationController
         format.json { render :show, status: :created, location: @beer }
       else
         @breweries = Brewery.all
-        @styles =["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
+        @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
