@@ -12,13 +12,22 @@
       Has made <%= pluralize(@user.ratings.count, 'rating') %> with an average of <%= @user.average_rating %>
     <% end %>
 </p>
-<p><strong>ratings</strong></p>
+<p><strong>Ratings</strong></p>
 
 <ul>
  <% @user.ratings.each do |rating| %>
    <li> 
    <%= rating.beer.name %> <%= rating.score %>
    <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+   </li>
+ <% end %>
+</ul>
+
+<p><strong>Member of</strong></p>
+<ul>
+ <% @user.beer_clubs.each do |club| %>
+   <li> 
+   <%= club.name %>
    </li>
  <% end %>
 </ul>

@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Beer clubs</h1>
+
+<p>Number of clubs: <%= @beer_clubs.count %></p>
+
+<div id="beer_clubs">
+  <% @beer_clubs.each do |club| %>
+    <div id="<%= dom_id club %>">
+      <p>
+        <strong><%= link_to club.name, club %></strong>
+      </p>
+    
+      <p>
+        <li><strong>Founded:</strong>
+        <%= club.founded %></li>
+      </p>
+    
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "New beer club", new_beer_club_path %>

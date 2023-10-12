@@ -1,0 +1,27 @@
+<div id="<%= dom_id beer_club %>">
+  <p>
+    <strong>Name:</strong>
+    <%= beer_club.name %>
+  </p>
+
+  <p>
+    <strong>Founded:</strong>
+    <%= beer_club.founded %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= beer_club.city %>
+  </p>
+  <p><strong>Members:</strong></p>
+    <% if beer_club.members.empty? %>
+    club has no members yet!
+    <% else %>
+      Club has <%= pluralize(beer_club.members.count, 'member') %>
+      <ul>
+        <% beer_club.members.each do |member| %>
+            <li> <%= member.username %> </li>
+        <% end %>
+    <% end %>
+
+</div>
