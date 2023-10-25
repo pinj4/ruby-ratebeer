@@ -18,7 +18,7 @@
  <% @user.ratings.each do |rating| %>
    <li><%= "#{rating.to_s}" %>
    <% if @user == current_user %>
-     <%= link_to "Delete", rating, data: {turbo_method: :delete} %>
+     <%= link_to "Delete", rating,  data: {turbo_method: :delete} %>
    <% end %>
    </li>
  <% end %>
@@ -33,7 +33,19 @@
  <% end %>
 </ul>
 
+<p>
+  <% if @user.ratings.empty? %>
+    user doesn't have a favorite brewery yet
+  <% else %>
+    <strong>Favorite brewery:</strong> <%= @user.favorite_brewery %>
+  <% end %>
 
+<p>
+  <% if @user.ratings.empty? %>
+    user doesn't have a favorite style yet
+  <% else %>
+    <strong>Favorite style:</strong> <%= @user.favorite_style %>
+  <% end %>
 
 <div>
   <% if @user == current_user %>

@@ -13,9 +13,9 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    @beer_clubst = BeerClub.all
+    @beer_clubs_t = BeerClub.all
     @beer_clubs = []
-    @beer_clubst.each do |club|
+    @beer_clubs_t.each do |club|
       if club.members.exclude?(current_user)
         @beer_clubs.append(club)
       end
