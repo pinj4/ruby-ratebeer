@@ -1,14 +1,14 @@
 require 'rails_helper'
 
+include Helpers
+
 describe "Beers page" do
+  let!(:user) { FactoryBot.create :user }
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
 
-  before :each do
-    visit beers_path
-  end
-
   it "can add new beer" do
-    click_link "New beer"
+    sign_in(username: "Pekka", password: "Foobar1")
+    visit new_beer_path
    # fill_in('beer_name', with: "testbeer")
     fill_in('beer[name]', with: 'test beer')
     select('Lager', from: 'beer[style]')
@@ -20,7 +20,8 @@ describe "Beers page" do
   end
 
   it "doesnt add beer if name not valid" do
-    click_link "New beer"
+    sign_in(username: "Pekka", password: "Foobar1")
+    visit new_beer_path
     fill_in('beer[name]', with: '')
     select('Lager', from: 'beer[style]')
     select('Koff', from: 'beer[brewery_id]')
