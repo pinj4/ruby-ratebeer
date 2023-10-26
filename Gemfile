@@ -81,6 +81,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'rubocop'
 end
 
 # group :development, :test do
