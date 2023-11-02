@@ -23,6 +23,8 @@ end
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
+gem 'httparty'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
@@ -75,13 +77,14 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
-  gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
   gem 'launchy'
-  gem 'simplecov', require: false
+  gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop'
+  gem 'selenium-webdriver'
+  gem 'simplecov', require: false
+  gem 'webdrivers'
+  gem 'webmock'
 end
 
 # group :development, :test do

@@ -50,7 +50,7 @@ describe "User" do
       sign_in(username: "Pekka", password: "Foobar1")
       create_beers_with_many_ratings({user: user}, 10, 20, 30)
       visit user_path(user)
-      page.all('a')[9].click
+      page.all('a')[10].click
       expect(page).to have_content "anonymous 20"
       expect(page).to have_content "anonymous 30"
       expect(page).to have_content "2 ratings"

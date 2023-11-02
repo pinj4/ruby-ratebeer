@@ -251,7 +251,7 @@
           1,
           null,
           1,
-          211,
+          223,
           null,
           163,
           null,
@@ -531,6 +531,55 @@
           null
         ]
       },
+      "/home/pinsalom/Documents/ruby/ratebeer/lib/beermapping_api.rb": {
+        "lines": [
+          1,
+          1,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          null,
+          2,
+          2,
+          3,
+          null,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null
+        ]
+      },
+      "/home/pinsalom/Documents/ruby/ratebeer/app/models/place.rb": {
+        "lines": [
+          1,
+          1,
+          6,
+          null,
+          null
+        ]
+      },
+      "/home/pinsalom/Documents/ruby/ratebeer/app/controllers/places_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          1,
+          3,
+          3,
+          1,
+          null,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/pinsalom/Documents/ruby/ratebeer/app/controllers/ratings_controller.rb": {
         "lines": [
           1,
@@ -780,6 +829,6 @@
         }
       }
     },
-    "timestamp": 1698311892
+    "timestamp": 1698939767
   }
 }
