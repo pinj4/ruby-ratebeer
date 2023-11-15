@@ -1,0 +1,8 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= @place.name %></h1>
+<p><%= @place.status %>
+<p><strong>Address: </strong><%= @place.street %>, <%= @place.city %> <%= @place.zip %>
+<p><strong>Phone: </strong><%= @place.phone %>
+
+<p><%= link_to "Back to places", places_path %>

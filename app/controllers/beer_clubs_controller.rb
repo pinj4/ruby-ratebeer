@@ -8,6 +8,15 @@ class BeerClubsController < ApplicationController
 
   # GET /beer_clubs/1 or /beer_clubs/1.json
   def show
+    return nil if session[:user_id].nil?
+
+    if @beer_club.members.exclude?(User.find(current_user.id))
+      @membership = Membership.new
+      @membership.beer_club = @beer_club
+      @membership.user = User.find(current_user.id)
+    else
+      @membership = Membership.find_by user_id: current_user.id
+    end
   end
 
   # GET /beer_clubs/new

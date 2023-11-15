@@ -44,8 +44,9 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.create params.require(:membership).permit(:beer_club_id)
     @membership.user = current_user
-    if @membership.save
-      redirect_to user_path current_user
+    if @membership.save()
+      redirect_to beer_club_url(:beer_club_id), notice: "#{current_user.username} welcome to the club!" 
+
     else
       @beer_clubs = BeerClub.all
       render :new, status: :unprocessable_entity
@@ -67,10 +68,12 @@ class MembershipsController < ApplicationController
 
   # DELETE /memberships/1 or /memberships/1.json
   def destroy
+    name = @membership.beer_club.name
     @membership.destroy
 
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: "Membership was successfully destroyed." }
+      #@beer_club = BeerClub.find(params[:beer_club_id])
+      format.html { redirect_to beer_club_url(:beer_club_id), notice: "Membership in #{name} ended." }
       format.json { head :no_content }
     end
   end
@@ -86,6 +89,6 @@ class MembershipsController < ApplicationController
   def membership_params
     # params.require(:membership).permit(:user_id, :beer_club_id)
     # @membership.user = current_user
-    params.require(:membership).permit(:user_id, :beer_club_id)
+    params.require(:membership).permit(:user_id, :beer_club_id, :membership_id, :beer_club_name)
   end
 end

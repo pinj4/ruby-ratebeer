@@ -11,6 +11,7 @@ gem 'sprockets-rails'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'sqlite3'
