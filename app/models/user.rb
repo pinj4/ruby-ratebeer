@@ -58,7 +58,7 @@ class User < ApplicationRecord
   def favorite_style
     return nil if ratings.empty?
 
-    styles_average.max_by(&:last).first
+    styles_average.max_by(&:last).first.name
   end
 
   def breweries_points

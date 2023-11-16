@@ -5,13 +5,13 @@ include Helpers
 describe "Beers page" do
   let!(:user) { FactoryBot.create :user }
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+  let!(:style) { FactoryBot.create :style, name: "Lager" }
 
   it "can add new beer" do
     sign_in(username: "Pekka", password: "Foobar1")
     visit new_beer_path
-   # fill_in('beer_name', with: "testbeer")
     fill_in('beer[name]', with: 'test beer')
-    select('Lager', from: 'beer[style]')
+    select('Lager', from: 'beer[style_id]')
     select('Koff', from: 'beer[brewery_id]')
 
     expect{
@@ -23,7 +23,7 @@ describe "Beers page" do
     sign_in(username: "Pekka", password: "Foobar1")
     visit new_beer_path
     fill_in('beer[name]', with: '')
-    select('Lager', from: 'beer[style]')
+    select('Lager', from: 'beer[style_id]')
     select('Koff', from: 'beer[brewery_id]')
 
     click_button "Create Beer"

@@ -44,8 +44,8 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.create params.require(:membership).permit(:beer_club_id)
     @membership.user = current_user
-    if @membership.save()
-      redirect_to beer_club_url(:beer_club_id), notice: "#{current_user.username} welcome to the club!" 
+    if @membership.save
+      redirect_to beer_club_url(:beer_club_id), notice: "#{current_user.username} welcome to the club!"
 
     else
       @beer_clubs = BeerClub.all
@@ -72,7 +72,7 @@ class MembershipsController < ApplicationController
     @membership.destroy
 
     respond_to do |format|
-      #@beer_club = BeerClub.find(params[:beer_club_id])
+      # @beer_club = BeerClub.find(params[:beer_club_id])
       format.html { redirect_to beer_club_url(:beer_club_id), notice: "Membership in #{name} ended." }
       format.json { head :no_content }
     end

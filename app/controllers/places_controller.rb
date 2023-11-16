@@ -20,6 +20,5 @@ class PlacesController < ApplicationController
   def set_place
     @places = BeermappingApi.places_in(session[:last_city])
     @place = @places.find{ |place| place['id'] == params[:id] }
-
   end
 end

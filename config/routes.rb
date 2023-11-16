@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :styles
   resources :memberships
   resources :beer_clubs
   resources :users
@@ -20,5 +21,4 @@ Rails.application.routes.draw do
 
   resources :places, only: [:index, :show]
   post 'places', to: 'places#search'
-
 end
