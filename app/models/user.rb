@@ -15,8 +15,14 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, -> { distinct }, through: :memberships
 
+  scope :active, -> { order(ratings_count: :desc).limit(3) }
+
   def to_s
     username.to_s
+  end
+
+  def ratings_count
+    return self.ratings.count
   end
 
   def favorite_beer
@@ -25,75 +31,23 @@ class User < ApplicationRecord
     ratings.order(score: :desc).limit(1).first.beer
   end
 
-  def styles_points
-    points = {}
+  def favorite_by(my_ratings, criteria)
+    by_criteria = my_ratings
+                  .group_by { |rating| rating.beer.send(criteria) }
+                  .map { |key, val| [key, val.sum(&:score) / val.size] }
 
-    ratings.each do |r|
-      points[r.beer.style] = 0 if points[r.beer.style].nil?
-      points[r.beer.style] += r.score
-    end
-    points
-  end
-
-  def styles_count
-    count = {}
-
-    ratings.each do |r|
-      count[r.beer.style] = 0 if count[r.beer.style].nil?
-      count[r.beer.style] += 1
-    end
-    count
-  end
-
-  def styles_average
-    hash = {}
-
-    styles_points.each do |name, sum|
-      avg = sum / styles_count[name]
-      hash[name] = avg
-    end
-    hash
+    by_criteria.max_by(&:last).first
   end
 
   def favorite_style
     return nil if ratings.empty?
 
-    styles_average.max_by(&:last).first.name
-  end
-
-  def breweries_points
-    points = {}
-
-    ratings.each do |r|
-      points[r.beer.brewery] = 0 if points[r.beer.brewery].nil?
-      points[r.beer.brewery] += r.score
-    end
-    points
-  end
-
-  def breweries_count
-    count = {}
-
-    ratings.each do |r|
-      count[r.beer.brewery] = 0 if count[r.beer.brewery].nil?
-      count[r.beer.brewery] += 1
-    end
-    count
-  end
-
-  def breweries_average
-    hash = {}
-
-    breweries_points.each do |name, sum|
-      avg = sum / breweries_count[name]
-      hash[name] = avg
-    end
-    hash
+    favorite_by(ratings, :style).name
   end
 
   def favorite_brewery
     return nil if ratings.empty?
 
-    breweries_average.max_by(&:last).first.name
+    favorite_by(ratings, :brewery).name
   end
 end

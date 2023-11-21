@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @style %>
 
 <div>
-  <%= link_to "Edit this style", edit_style_path(@style) %> |
-  <%= link_to "Back to styles", styles_path %>
+  <%= link_to "Edit this style", edit_style_path(@style), class:"btn btn-primary" %> |
+  <%= link_to "Back to styles", styles_path, class:"btn btn-secondary" %>
 
-  <%= button_to "Destroy this style", @style, method: :delete %>
+  <p><%= button_to "Destroy this style", @style, class:"btn btn-danger", method: :delete %>
 </div>

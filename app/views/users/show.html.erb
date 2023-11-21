@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 <%= javascript_include_tag "turbo", type: "module" %>
 <p>
 <strong>Username:</strong>
@@ -49,8 +48,9 @@
 
 <div>
   <% if @user == current_user %>
-    <%= link_to "Edit this user", edit_user_path(@user) %> 
-    <%= button_to "Destroy this user", @user, method: :delete %>
+    <%= link_to "Edit this user", edit_user_path(@user), class:"btn btn-primary" %> |
+    <%= link_to "Back to users", users_path, class:"btn btn-secondary" %></p>
+
+    <p><%= button_to "Destroy this user", @user, class:"btn btn-danger", method: :delete %>
   <% end %>
-  <p><%= link_to "Back to users", users_path %></p>
 </div>
