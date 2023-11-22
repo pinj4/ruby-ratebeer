@@ -4,11 +4,20 @@
 <%= @user.username %>
 </p>
 
+
+<% if not current_user.nil? %>
+  <% if current_user.admin %>
+    <% if not @user.active  %>
+      <span class="badge bg-secondary">closed</span>
+    <% end %>
+  <% end %>
+<% end %>
+
 <p>
     <% if @user.ratings.empty? %>
     user hasn't given any ratings yet!
     <% else %>
-      Has made <%= pluralize(@user.ratings.count, 'rating') %> with an average of <%= @user.average_rating %>
+      Has made <%= pluralize(@user.ratings.count, 'rating') %> with an average of <%= round(@user.average_rating) %>
     <% end %>
 </p>
 <p><strong>Ratings</strong></p>
@@ -45,6 +54,17 @@
   <% else %>
     <strong>Favorite style:</strong> <%= @user.favorite_style %>
   <% end %>
+<p>
+<% if not current_user.nil? %>
+  <% if current_user.admin %>
+    <% if not @user.active  %>
+      <%= link_to "open account", toggle_activity_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "close account", toggle_activity_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-danger" %>
+    <% end %>
+  <% end %>
+<% end %>
+</p>
 
 <div>
   <% if @user == current_user %>

@@ -22,6 +22,8 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.active = true
+    @user.admin = false
 
     respond_to do |format|
       if @user.save
@@ -60,6 +62,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_activity
+    user = User.find(params[:id])
+    user.update_attribute :active, !user.active
+
+    new_status = user.active? ? "active" : "closed"
+
+    redirect_to user, notice: "user sccount status changed to #{new_status}"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +80,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :password_confirmation, :admin, :active)
   end
 end

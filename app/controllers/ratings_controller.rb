@@ -6,7 +6,6 @@ class RatingsController < ApplicationController
     @top_beers = Beer.top 3
     @top_styles = Style.top 3
     @active_users = User.active
-
   end
 
   def new

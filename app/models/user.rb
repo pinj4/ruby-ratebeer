@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def ratings_count
-    return self.ratings.count
+    ratings.count
   end
 
   def favorite_beer

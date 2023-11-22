@@ -19,10 +19,8 @@
 
 <div>
   <br>
-  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club), class:"btn btn-primary" %> |
+  <%= edit_and_destroy_buttons(@beer_club) %>
   <%= link_to "Back to beer clubs", beer_clubs_path, class:"btn btn-secondary" %>
-
-  <p><%= button_to "Destroy this beer club", @beer_club, method: :delete, class:"btn btn-danger" %>
 </div>
 <% end %>
 

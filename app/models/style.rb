@@ -4,9 +4,6 @@ class Style < ApplicationRecord
   include TopRated
 
   def average_rating
-    total = self.beers.sum{|b| b.average_rating }
-    total
+    beers.sum(&:average_rating)
   end
-
-  
 end

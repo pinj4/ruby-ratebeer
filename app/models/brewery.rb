@@ -9,7 +9,7 @@ class Brewery < ApplicationRecord
   has_many :ratings, through: :beers
 
   scope :active, -> { where active: true }
-  scope :retired, -> { where active: [nil,false] }
+  scope :retired, -> { where active: [nil, false] }
 
   def year_cant_be_in_the_future
     return unless year > Date.today.year
