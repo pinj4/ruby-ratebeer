@@ -26,30 +26,32 @@ class MembershipsController < ApplicationController
   def edit
   end
 
+  #def create
+   # @membership = Membership.new(membership_params)
+    #@membership.user = current_user
+    #if @membership.save
+     # redirect_to beer_club_url(:beer_club_id), notice: "#{current_user.username} welcome to the club!"
+
+    #else
+     # @beer_clubs = BeerClub.all
+      #render :new, status: :unprocessable_entity
+    #end
+  #end
+
+
   # POST /memberships or /memberships.json
-  # def create
-  #   @membership = Membership.new(membership_params)
-
-  #   respond_to do |format|
-  #     if @membership.save
-  #       format.html { redirect_to membership_url(@membership), notice: "Membership was successfully created." }
-  #       format.json { render :show, status: :created, location: @membership }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @membership.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   def create
-    @membership = Membership.create params.require(:membership).permit(:beer_club_id)
+    @membership = Membership.new(membership_params)
     @membership.user = current_user
-    if @membership.save
-      redirect_to beer_club_url(:beer_club_id), notice: "#{current_user.username} welcome to the club!"
 
-    else
-      @beer_clubs = BeerClub.all
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @membership.save
+        format.html { redirect_to beer_club_url(@membership.beer_club), notice: "#{current_user.username} welcome to the club!" }
+        format.json { render :show, status: :created, location: @membership }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @membership.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -72,8 +74,7 @@ class MembershipsController < ApplicationController
     @membership.destroy
 
     respond_to do |format|
-      # @beer_club = BeerClub.find(params[:beer_club_id])
-      format.html { redirect_to beer_club_url(:beer_club_id), notice: "Membership in #{name} ended." }
+      format.html { redirect_to user_path current_user, notice: "Membership in #{name} ended." }
       format.json { head :no_content }
     end
   end
@@ -87,8 +88,6 @@ class MembershipsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def membership_params
-    # params.require(:membership).permit(:user_id, :beer_club_id)
-    # @membership.user = current_user
-    params.require(:membership).permit(:user_id, :beer_club_id, :membership_id, :beer_club_name)
+    params.require(:membership).permit(:beer_club_id, :user_id)
   end
 end

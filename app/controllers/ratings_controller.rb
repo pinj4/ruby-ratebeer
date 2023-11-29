@@ -9,6 +9,7 @@ class RatingsController < ApplicationController
   end
 
   def new
+    expire_fragment('brewerylist')
     @rating = Rating.new
     @beers = Beer.all
   end

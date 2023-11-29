@@ -34,11 +34,15 @@
 
 <p><strong>Member of</strong></p>
 <ul>
- <% @user.beer_clubs.each do |club| %>
-   <li> 
-   <%= club.name %>
-   </li>
- <% end %>
+  <% if @user.beer_clubs.empty? %>
+    user isn't a member of any clubs yet!
+  <% else %>
+    <% @user.beer_clubs.each do |club| %>
+      <li> 
+      <%= club.name %>
+      </li>
+    <% end %>
+  <% end %>
 </ul>
 
 <p>

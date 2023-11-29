@@ -3,6 +3,10 @@
 <p>Number of clubs: <%= @beer_clubs.count %></p>
 
 <div id="beer_clubs">
+<%= link_to "sort by name", beer_clubs_path(order: "name")%> | 
+<%= link_to "sort by year", beer_clubs_path(order: "year")%> | 
+<%= link_to "sort by city", beer_clubs_path(order: "city")%>
+<p>
   <% @beer_clubs.each do |club| %>
     <div id="<%= dom_id club %>">
       <p>
